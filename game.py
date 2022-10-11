@@ -8,21 +8,12 @@ height = 5
 playground = [[0]*width for i in range(height)]
 colors = ["#BBBBBB","#BB5555","#55BBBB","#55BB55"] # ["empty","blocked","bonus","player"]
 window = tk.Tk()
-window.geometry("240x255")
+window.geometry(f"{width*48}x{height*51}")
 window.resizable(False, False)
 
 def change_field(playground,x,y,number):
     colors = ["#BBBBBB","#BB5555","#55BBBB","#55BB55"]
     playground[x][y]["bg"] = colors[number]
-    '''
-    bonus number
-    if not (playground[x][y]["bg"] == "#55BB55"):
-        None
-    elif playground[x][y]["text"] == "":
-        playground[x][y]["text"] = str(1)
-    else:
-        playground[x][y]["text"] = str(int(playground[x][y]["text"])+1)
-    '''
 
 def move(way,playground,player_field,colors):
     x, y = player_field
@@ -43,8 +34,8 @@ def move(way,playground,player_field,colors):
             change_field(playground,x,y+1,3)
             change_field(playground,x,y,0)
     if find_field(playground,colors,2) == None:
-        for i in range(5):
-            for j in range(5):
+        for i in range(width):
+            for j in range(height):
                 change_field(playground,i,j,3)
                 window.update()
                 time.sleep(0.1)
@@ -52,8 +43,8 @@ def move(way,playground,player_field,colors):
 
 
 def find_field(playground,colors,number):
-    for x in range(5):
-        for y in range(5):
+    for x in range(width):
+        for y in range(height):
             if playground[x][y]["bg"] == colors[number]:
                 return [x,y]
     return None
@@ -102,4 +93,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
